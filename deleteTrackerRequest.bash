@@ -3,6 +3,10 @@
 # $1 is the file path of the torrent file
 # $2 is the hash of the torrent
 
+# copy this script to /config folder in qbittorrent container
+# add the following line to qbittorrent settings in "on torrent added" section
+# /config/deleteTrackerRequest.bash /config/qBittorrent/BT_backup/%I.fastresume %I
+
 sleep 2
 tracker_url=$(sed -n 's|.*\(http[^ ]*announce\).*|\1|p' $1)
 url_encoded=$(echo $tracker_url | jq --slurp --raw-input --raw-output @uri)
