@@ -1,6 +1,7 @@
 from random import choice
 from sys import argv
 import re
+from time import sleep
 
 class BadUserInputError(Exception):
     pass
@@ -18,9 +19,11 @@ if __name__ == "__main__":
         new_tracker = bytes(argv[2], "utf-8")
     else:
         raise BadUserInputError("ERROR: Bad input\nUsage: python3 patchTorrentTracker.py [path/to/torrent/file] ([new_tracker])")
+    sleep(2)
     with open(argv[1], "r+b") as torrent:
         data = torrent.read()
-        old_tracker = bytes(re.search("/([A-Za-z0-9]{32})/", data[0:100].decode("utf-8")).group(1), "utf-8")
+        r = re.compile(b"/([A-Za-z0-9]{32})/", re.DOTALL)
+        old_tracker = r.search(data).group(1)
         data = data.replace(old_tracker, new_tracker)
         torrent.seek(0)
         torrent.write(data)
