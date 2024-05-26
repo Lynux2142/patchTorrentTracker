@@ -6,7 +6,7 @@
 
 # copy this script to /config folder in qbittorrent container
 # add the following line to qbittorrent settings in "on torrent added" section
-# /config/deleteTrackerRequest.bash /config/qBittorrent/BT_backup/%I.fastresume %I 4
+# /config/deleteTrackerRequest.bash "/config/qBittorrent/BT_backup/%I.fastresume" %I 4
 
 sleep $3
 tracker_url=$(sed -n 's|.*\(http[^ ]*announce\).*|\1|p' $1)
