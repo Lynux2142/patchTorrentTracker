@@ -25,7 +25,7 @@ powershell.exe -executionpolicy bypass .\deleteTrackerRequest.ps1 c:\Users\UserN
 
 Put this script in the qBittorrent installation directory and add this command in the "on torrent added" section of the qBittorrent client (don't forget to enable WebUI in the settings and set the port to 8080):
 
-powershell.exe -executionpolicy bypass .\deleteTrackerRequest.ps1 c:\Users\{username}\Downloads\%N.torrent %I 4
+powershell.exe -executionpolicy bypass .\deleteTrackerRequest.ps1 "c:\Users\{username}\Downloads\%N.torrent" %I 4
 #>
 
 param (
