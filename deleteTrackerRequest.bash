@@ -10,7 +10,7 @@
 # /config/deleteTrackerRequest.bash "/config/qBittorrent/BT_backup/%I.fastresume" %I 4
 
 sleep $4
-tracker_url=$(grep -a -Po "https?:\/\/[^ ]*\/[a-zA-Z0-9]{32}\/announce" "$1/$2")
+tracker_url=$(grep -a -Eo "https?:\/\/[^ ]*\/[a-zA-Z0-9]{32}\/announce" "$1/$2")
 echo -n $tracker_url > "$1/$2.tracker"
 url_encoded=$(echo -n $tracker_url | jq --slurp --raw-input --raw-output @uri)
 curl 'http://localhost:8080/api/v2/torrents/removeTrackers' -X POST --data-raw "hash=$3&urls=$url_encoded"
