@@ -11,3 +11,4 @@
 tracker_url=$(head -n 1 "$1/$2.tracker")
 url_encoded=$(echo -n $tracker_url | jq --slurp --raw-input --raw-output @uri)
 curl 'http://localhost:8080/api/v2/torrents/addTrackers' -X POST --data-raw "hash=$3&urls=$url_encoded"
+rm "$1/$2.tracker"
